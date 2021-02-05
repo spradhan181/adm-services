@@ -101,7 +101,7 @@ public class UserDao implements IUserDAO {
 
 	@Override
 	public UserResponse recoverPassword(UserRequest request) {
-		UserResponse response = validateUser(request.getUserName(), null);
+		UserResponse response = validateUser(request.getEmail(), null);
 		return response;
 	}
 
@@ -111,7 +111,7 @@ public class UserDao implements IUserDAO {
 		Statement statement = null;
 		UserResponse response = new UserResponse();
 		String updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'" +
-				" where email = " + "'" + userRequest.getUserName() + "'";
+				" where email = " + "'" + userRequest.getEmail() + "'";
 		try {
 			Class.forName(DRIVER_NAME);
 			connect = DriverManager.getConnection(CONNECTION_URL);

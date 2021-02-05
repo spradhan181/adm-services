@@ -27,7 +27,7 @@ public class UserResource {
 	@CrossOrigin(origins = "*")
 	@PostMapping(path = "/signin")
 	public UserResponse validateUser(@RequestBody UserRequest request) {
-		return service.validateUser(request.getUserName(),
+		return service.validateUser(request.getEmail(),
 				request.getPassword());
 	}
 	
