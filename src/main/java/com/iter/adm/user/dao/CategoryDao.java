@@ -1,4 +1,4 @@
-package com.iter.adm.dao;
+package com.iter.adm.user.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
-import com.iter.adm.model.Category;
-import com.iter.adm.model.CategoryResponse;
-import com.iter.adm.model.UserResponse;
+import com.iter.adm.user.model.Category;
+import com.iter.adm.user.model.CategoryResponse;
+import com.iter.adm.user.model.UserResponse;
 
 @Component
 public class CategoryDao implements ICategoryDao {

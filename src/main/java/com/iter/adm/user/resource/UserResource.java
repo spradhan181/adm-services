@@ -1,4 +1,4 @@
-package com.iter.adm.resource;
+package com.iter.adm.user.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iter.adm.model.CreateUserRequest;
-import com.iter.adm.model.CreateUserResponse;
-import com.iter.adm.model.UserRequest;
-import com.iter.adm.model.UserResponse;
-import com.iter.adm.service.IUserService;
+import com.iter.adm.user.model.CreateUserRequest;
+import com.iter.adm.user.model.CreateUserResponse;
+import com.iter.adm.user.model.UserRequest;
+import com.iter.adm.user.model.UserResponse;
+import com.iter.adm.user.service.IUserService;
 
 @RestController
 public class UserResource {

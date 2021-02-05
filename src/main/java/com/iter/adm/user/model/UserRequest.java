@@ -1,4 +1,4 @@
-package com.iter.adm.model;
+package com.iter.adm.user.model;
 
 public class UserRequest {
 

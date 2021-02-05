@@ -1,4 +1,4 @@
-package com.iter.adm.model;
+package com.iter.adm.user.model;
 
 import java.util.ArrayList;
 

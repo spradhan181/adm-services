@@ -1,13 +1,13 @@
-package com.iter.adm.service;
+package com.iter.adm.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.iter.adm.dao.IUserDAO;
-import com.iter.adm.model.CreateUserRequest;
-import com.iter.adm.model.CreateUserResponse;
-import com.iter.adm.model.UserRequest;
-import com.iter.adm.model.UserResponse;
+import com.iter.adm.user.dao.IUserDAO;
+import com.iter.adm.user.model.CreateUserRequest;
+import com.iter.adm.user.model.CreateUserResponse;
+import com.iter.adm.user.model.UserRequest;
+import com.iter.adm.user.model.UserResponse;
 
 @Component
 public class UserService implements IUserService {

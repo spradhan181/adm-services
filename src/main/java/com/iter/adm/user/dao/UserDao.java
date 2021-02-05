@@ -1,4 +1,4 @@
-package com.iter.adm.dao;
+package com.iter.adm.user.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,10 +10,10 @@ import java.sql.Statement;
 
 import org.springframework.stereotype.Component;
 
-import com.iter.adm.model.CreateUserRequest;
-import com.iter.adm.model.CreateUserResponse;
-import com.iter.adm.model.UserRequest;
-import com.iter.adm.model.UserResponse;
+import com.iter.adm.user.model.CreateUserRequest;
+import com.iter.adm.user.model.CreateUserResponse;
+import com.iter.adm.user.model.UserRequest;
+import com.iter.adm.user.model.UserResponse;
 import com.mysql.cj.util.StringUtils;
 
 @Component

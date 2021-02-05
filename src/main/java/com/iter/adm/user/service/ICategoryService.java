@@ -1,6 +1,6 @@
-package com.iter.adm.service;
+package com.iter.adm.user.service;
 
-import com.iter.adm.model.CategoryResponse;
+import com.iter.adm.user.model.CategoryResponse;
 
 public interface ICategoryService {
 public CategoryResponse getCategoryDetailsFromServiceClass();
