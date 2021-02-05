@@ -14,7 +14,7 @@ import com.iter.adm.model.CategoryResponse;
 import com.iter.adm.model.UserResponse;
 
 @Component
-public class CategoryDao implements IcategoryDao {
+public class CategoryDao implements ICategoryDao {
 
 	@Override
 	public CategoryResponse getCategoryDetailsfromServiceClass() {

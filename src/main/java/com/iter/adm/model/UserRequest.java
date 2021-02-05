@@ -1,21 +1,34 @@
 package com.iter.adm.model;
 
 public class UserRequest {
-	private String username;
+
+	private String userName;
 	private String password;
-	public String getUsername() {
-		return username;
+	private String otp;
+
+	public String getUserName() {
+		return userName;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}
 	
 
 }

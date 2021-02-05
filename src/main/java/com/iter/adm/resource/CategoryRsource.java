@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iter.adm.model.CategoryResponse;
-import com.iter.adm.service.IcategoryService;
+import com.iter.adm.service.ICategoryService;
 
 @RestController
 public class CategoryRsource {
 	@Autowired
-	IcategoryService service;
+	ICategoryService service;
 
 	@GetMapping(path = "/details")
 	@CrossOrigin(origins = "*")
