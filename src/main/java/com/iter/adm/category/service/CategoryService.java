@@ -12,10 +12,9 @@ public class CategoryService implements ICategoryService {
 	ICategoryDao dao;
 
 	@Override
-	public CategoryResponse getCategoryDetailsFromServiceClass() {
-	return dao.getCategoryDetailsfromServiceClass();
-		
-		
+	public CategoryResponse getCategoryDetails() {
+		return dao.getCategoryDetails();
+
 	}
 
 }

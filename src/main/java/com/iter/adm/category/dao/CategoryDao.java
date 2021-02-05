@@ -1,61 +1,38 @@
 package com.iter.adm.category.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.iter.adm.category.model.Category;
 import com.iter.adm.category.model.CategoryResponse;
-import com.iter.adm.user.model.UserResponse;
 
 @Component
 public class CategoryDao implements ICategoryDao {
 
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+
 	@Override
-	public CategoryResponse getCategoryDetailsfromServiceClass() {
-		Connection connect = null;
-		Statement state = null;
-		ResultSet res = null;
-		CategoryResponse response = new CategoryResponse();
-		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
+	public CategoryResponse getCategoryDetails() {
+		CategoryResponse categoryResponse = new CategoryResponse();
+		RowMapper<Category> mapRow = new RowMapper<Category>() {
+			public Category mapRow(ResultSet rs, int row) throws SQLException {
+				Category category = new Category();
+				category.setCategoryId(rs.getString("category_id"));
+				category.setCategoryName(rs.getString("category_name"));
+				return category;
+			}
+		};
 
-			e.printStackTrace();
-		}
-		try {
-			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Project_ADM?user=root&password=Sudhakar181@12");
-			state=connect.createStatement();
-			res=state.executeQuery("Select * from category");
-		}catch(
-
-	SQLException e)
-	{
-
-		e.printStackTrace();
+		List<Category> result = jdbcTemplate.query("select * from category", mapRow);
+		categoryResponse.setCategoryList(result);
+		return categoryResponse;
 	}
-		
-	ArrayList<Category>  catlist = new ArrayList<>();
-	try {
-		while(res.next()==true) {
-		
-			Category cat = new Category();
-			cat.setCategoryId(res.getString("category_id"));
-			cat.setCategoryName(res.getString("category_name"));
-			catlist.add(cat);
-			response.setCategoryList(catlist);
-		}
-	} catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-	return response;
-}
-	
+
 }
