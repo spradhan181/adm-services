@@ -1,4 +1,4 @@
-package com.iter.adm.user.dao;
+package com.iter.adm.category.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
-import com.iter.adm.user.model.Category;
-import com.iter.adm.user.model.CategoryResponse;
+import com.iter.adm.category.model.Category;
+import com.iter.adm.category.model.CategoryResponse;
 import com.iter.adm.user.model.UserResponse;
 
 @Component
