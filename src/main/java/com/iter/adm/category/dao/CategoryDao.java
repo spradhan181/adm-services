@@ -24,8 +24,8 @@ public class CategoryDao implements ICategoryDao {
 		RowMapper<Category> mapRow = new RowMapper<Category>() {
 			public Category mapRow(ResultSet rs, int row) throws SQLException {
 				Category category = new Category();
-				category.setCategoryId(rs.getString("category_id"));
-				category.setCategoryName(rs.getString("category_name"));
+				category.setCode(rs.getString("code"));
+				category.setName(rs.getString("name"));
 				return category;
 			}
 		};

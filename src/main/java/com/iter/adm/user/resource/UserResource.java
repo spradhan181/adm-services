@@ -27,16 +27,15 @@ public class UserResource {
 	@CrossOrigin(origins = "*")
 	@PostMapping(path = "/signin")
 	public UserResponse validateUser(@RequestBody UserRequest request) {
-		return service.validateUser(request.getEmail(),
-				request.getPassword());
+		return service.validateUser(request.getEmail(), request.getPassword());
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@PostMapping(path = "/recover")
 	public UserResponse recoverPassword(@RequestBody UserRequest request) {
 		return service.recoverPassword(request);
 	}
-	
+
 	@CrossOrigin(origins = "*")
 	@PostMapping(path = "/updatepassword")
 	public UserResponse updatePassword(@RequestBody UserRequest request) {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.iter.adm.user.model.CreateUserRequest;
 import com.iter.adm.user.model.CreateUserResponse;
+import com.iter.adm.user.model.UserData;
 import com.iter.adm.user.model.UserRequest;
 import com.iter.adm.user.model.UserResponse;
 import com.mysql.cj.util.StringUtils;
@@ -26,8 +27,7 @@ public class UserDao implements IUserDAO {
 	private static final String ERROR = "Error";
 	private static final String INVALID = "Invalid";
 	private static final String DUPLICATE = "Duplicate";
-	
-	
+
 	@Override
 	public CreateUserResponse createUser(CreateUserRequest userRequest) {
 		Connection connect = null;
@@ -49,11 +49,9 @@ public class UserDao implements IUserDAO {
 		} catch (SQLIntegrityConstraintViolationException e) {
 			response.setResult(DUPLICATE);
 			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		catch (SQLException ex) {
+		} catch (SQLException ex) {
 			response.setResult(ERROR);
 			ex.printStackTrace();
 		}
@@ -68,17 +66,16 @@ public class UserDao implements IUserDAO {
 		Statement statement = null;
 		ResultSet res = null;
 		UserResponse response = new UserResponse();
-		
-		String sqlUrl = null ;
-		
-		if(!StringUtils.isNullOrEmpty(password)) {
-			sqlUrl = "select * from user_login_details where email = " + "'" + emailId + "'"
-					+ " and  user_password = " + "'" + password + "'" ;
+
+		String sqlUrl = null;
+
+		if (!StringUtils.isNullOrEmpty(password)) {
+			sqlUrl = "select * from user_login_details where email = " + "'" + emailId + "'" + " and  user_password = "
+					+ "'" + password + "'";
 		} else {
-			sqlUrl = "select * from user_login_details where email = " + "'" + emailId + "'" ;
+			sqlUrl = "select * from user_login_details where email = " + "'" + emailId + "'";
 		}
-		
-	
+
 		try {
 			Class.forName(DRIVER_NAME);
 			connect = DriverManager.getConnection(CONNECTION_URL);
@@ -86,6 +83,12 @@ public class UserDao implements IUserDAO {
 			res = statement.executeQuery(sqlUrl);
 
 			if (res.next() == true) {
+				UserData user = new UserData();
+				user.setEmailId(res.getString("email"));
+				user.setFirstName(res.getString("first_Name"));
+				user.setLastName(res.getString("last_Name"));
+				user.setGender(res.getString("gender"));
+				response.setUserData(user);
 				response.setResult(SUCCESS);
 			} else {
 				response.setResult(INVALID);
@@ -103,24 +106,24 @@ public class UserDao implements IUserDAO {
 	@Override
 	public UserResponse recoverPassword(UserRequest request) {
 		UserResponse response = null;
-		if(request.getOtp() == 0) {
-			response =  validateUser(request.getEmail(), null);
-		}else {
+		if (request.getOtp() == 0) {
+			response = validateUser(request.getEmail(), null);
+		} else {
 			response = new UserResponse();
 			response.setResult(verifyOtp(request));
 		}
 		return response;
-		
+
 	}
-	
+
 	private String verifyOtp(UserRequest request) {
 		Connection connect = null;
 		Statement statement = null;
 		ResultSet res = null;
-		
+
 		String sqlUrl = "select * from user_login_details where email = " + "'" + request.getEmail() + "'"
-					+ " and  otp = " + "'" + request.getOtp() + "'" ;
-	
+				+ " and  otp = " + "'" + request.getOtp() + "'";
+
 		try {
 			Class.forName(DRIVER_NAME);
 			connect = DriverManager.getConnection(CONNECTION_URL);
@@ -147,27 +150,26 @@ public class UserDao implements IUserDAO {
 		Connection connect = null;
 		Statement statement = null;
 		UserResponse response = new UserResponse();
-		String updateSql =  null;
-		if(!isOtpNeedsToBeSet) {
-			updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'" + " , otp = " + null +
-					" where email = " + "'" + userRequest.getEmail() + "'";
-		}else {
-			updateSql = "update user_login_details set otp = " + userRequest.getOtp() + " where email = " +"'" + userRequest.getEmail() + "'";
+		String updateSql = null;
+		if (!isOtpNeedsToBeSet) {
+			updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'"
+					+ " , otp = " + null + " where email = " + "'" + userRequest.getEmail() + "'";
+		} else {
+			updateSql = "update user_login_details set otp = " + userRequest.getOtp() + " where email = " + "'"
+					+ userRequest.getEmail() + "'";
 		}
-		
+
 		try {
 			Class.forName(DRIVER_NAME);
 			connect = DriverManager.getConnection(CONNECTION_URL);
 			statement = connect.createStatement();
 			statement.executeUpdate(updateSql);
 			response.setResult(SUCCESS);
-			
-		} 
-		catch (ClassNotFoundException e) {
+
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			response.setResult(ERROR);
-		}
-		catch (SQLException ex) {
+		} catch (SQLException ex) {
 			ex.printStackTrace();
 			response.setResult(ERROR);
 		}

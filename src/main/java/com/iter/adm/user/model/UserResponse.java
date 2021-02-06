@@ -1,21 +1,24 @@
 package com.iter.adm.user.model;
 
 public class UserResponse {
-	
+
 	String result;
-	String userName;
-	
+	UserData userData;
+
 	public String getResult() {
 		return result;
 	}
+
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public String getUserName() {
-		return userName;
+
+	public UserData getUserData() {
+		return userData;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUserData(UserData userData) {
+		this.userData = userData;
 	}
 	
 	

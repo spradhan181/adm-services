@@ -1,19 +1,20 @@
 package com.iter.adm.category.model;
 
 public class Category {
-	String categoryId;
-	String categoryName;
-	public String getCategoryId() {
-		return categoryId;
+	String code;
+	String name;
+	public String getCode() {
+		return code;
 	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
+	public void setCode(String code) {
+		this.code = code;
 	}
-	public String getCategoryName() {
-		return categoryName;
+	public String getName() {
+		return name;
 	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setName(String name) {
+		this.name = name;
 	}
+	
 
 }

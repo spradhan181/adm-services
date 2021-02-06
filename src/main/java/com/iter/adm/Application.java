@@ -16,17 +16,18 @@ public class Application {
 
 	/**
 	 * This is main method of adm services
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@Bean
-	public JdbcTemplate getJDBCTemplate (DataSource datasource) {
+	public JdbcTemplate getJDBCTemplate(DataSource datasource) {
 		return new JdbcTemplate(datasource);
 	}
-	
+
 	@Bean
 	public JavaMailSenderImpl getJavaMailSender() {
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
