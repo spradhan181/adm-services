@@ -28,7 +28,7 @@ public class Application {
 		return new JdbcTemplate(datasource);
 	}
 
-	@Bean
+	//@Bean
 	public JavaMailSenderImpl getJavaMailSender() {
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 		javaMailSender.setHost(emailConfig.getHost());
