@@ -7,7 +7,7 @@ public class CreateUserRequest {
 	private String emailId;
 	private String password;
 	private String gender;
-
+	private String confirmPassword;
 	
 	
 	public String getFirstName() {
@@ -40,6 +40,13 @@ public class CreateUserRequest {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
 	
 	
 

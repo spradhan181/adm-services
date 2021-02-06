@@ -1,20 +1,22 @@
-create Table user_login_details(
+create Table adm.user_login_details(
 
 first_Name VARCHAR(20) NOT NULL ,
 last_Name VARCHAR(10) NOT NULL,
 email VARCHAR(30) NOT NULL ,
 user_password  VARCHAR(20) NOT NULL,
 gender VARCHAR(10) NOT NULL,
+otp numeric(6) NULL,
 primary key (email)
 
 );
+SET SQL_SAFE_UPDATES = 0;
 
-drop table user_login_details
+drop table adm.user_login_details
 
 insert into user_login_details values ("deepika", "pradhan", "deepika@sa.com","future@123", "F");
 update user_login_details set user_password = "123" where email = 'deepika@sa.com';
 
-select * from user_login_details
+select * from adm.user_login_details
 
 
 create Table category(

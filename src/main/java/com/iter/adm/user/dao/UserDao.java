@@ -106,12 +106,18 @@ public class UserDao implements IUserDAO {
 	}
 
 	@Override
-	public UserResponse updatePassword(UserRequest userRequest) {
+	public UserResponse updatePassword(UserRequest userRequest, boolean isOtpNeedsToBeSet) {
 		Connection connect = null;
 		Statement statement = null;
 		UserResponse response = new UserResponse();
-		String updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'" +
-				" where email = " + "'" + userRequest.getEmail() + "'";
+		String updateSql =  null;
+		if(!isOtpNeedsToBeSet) {
+			updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'" + " and set otp = " + null +
+					" where email = " + "'" + userRequest.getEmail() + "'";
+		}else {
+			updateSql = "update user_login_details set otp = " + userRequest.getOtp() + " where email = " +"'" + userRequest.getEmail() + "'";
+		}
+		
 		try {
 			Class.forName(DRIVER_NAME);
 			connect = DriverManager.getConnection(CONNECTION_URL);
@@ -130,6 +136,14 @@ public class UserDao implements IUserDAO {
 		}
 
 		return response;
+	}
+
+	@Override
+	public UserResponse updateOTP(String email, int otp) {
+		UserRequest request = new UserRequest();
+		request.setEmail(email);
+		request.setOtp(otp);
+		return updatePassword(request, true);
 	}
 
 }

@@ -31,7 +31,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserResponse updatePassword(UserRequest request) {
-		return dao.updatePassword(request);
+		return dao.updatePassword(request, false);
 	}
 
 }

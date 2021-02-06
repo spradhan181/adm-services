@@ -5,7 +5,7 @@ public class UserRequest {
 	private String email;
 	private String password;
 	private String confirmPassword;
-	private String otp;
+	private int otp;
 
 	
 
@@ -34,11 +34,11 @@ public class UserRequest {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getOtp() {
+	public int getOtp() {
 		return otp;
 	}
 
-	public void setOtp(String otp) {
+	public void setOtp(int otp) {
 		this.otp = otp;
 	}
 	

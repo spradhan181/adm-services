@@ -14,6 +14,8 @@ public interface IUserDAO {
 
 	public UserResponse recoverPassword(UserRequest request);
 
-	public UserResponse updatePassword(UserRequest request);
+	public UserResponse updatePassword(UserRequest request, boolean isOTpRemoved);
+	
+	public UserResponse updateOTP(String email, int otp);
 
 }
