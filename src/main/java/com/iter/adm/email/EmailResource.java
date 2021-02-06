@@ -8,6 +8,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,8 @@ public class EmailResource {
 	@Autowired
 	IMiscDAO miscDao;
 	
+	
+	@CrossOrigin(origins = "*")
 	@PostMapping(path="/sendemail")
 	public String sendEmail(@RequestBody EmailRequest request) {	
 		int otp = generateOTP(request.getToEmailAddress());
@@ -44,6 +47,7 @@ public class EmailResource {
 		
 	}
 	
+	@CrossOrigin(origins = "*")
 	@Scheduled(cron = "0 0/5 * * * ?")
 	@PostMapping(path="/purgedata")
 	public String purgeOTP() {

@@ -20,7 +20,7 @@ import com.mysql.cj.util.StringUtils;
 public class UserDao implements IUserDAO {
 
 	private static final String CONNECTION_URL = "jdbc:mysql://localhost:3306/adm?user=root&password=Future@123";
-	private static final String USER_INSERT_QUERY = "INSERT INTO user_login_details values (?,?,?,?,?) ";
+	private static final String USER_INSERT_QUERY = "INSERT INTO user_login_details values (?,?,?,?,?,?) ";
 	private static final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 	private static final String SUCCESS = "Success";
 	private static final String ERROR = "Error";
@@ -41,6 +41,7 @@ public class UserDao implements IUserDAO {
 			ps.setString(3, userRequest.getEmailId());
 			ps.setString(4, userRequest.getPassword());
 			ps.setString(5, userRequest.getGender());
+			ps.setInt(6, 0);
 
 			ps.execute();
 			response.setResult(SUCCESS);
@@ -101,8 +102,44 @@ public class UserDao implements IUserDAO {
 
 	@Override
 	public UserResponse recoverPassword(UserRequest request) {
-		UserResponse response = validateUser(request.getEmail(), null);
+		UserResponse response = null;
+		if(request.getOtp() == 0) {
+			response =  validateUser(request.getEmail(), null);
+		}else {
+			response = new UserResponse();
+			response.setResult(verifyOtp(request));
+		}
 		return response;
+		
+	}
+	
+	private String verifyOtp(UserRequest request) {
+		Connection connect = null;
+		Statement statement = null;
+		ResultSet res = null;
+		
+		String sqlUrl = "select * from user_login_details where email = " + "'" + request.getEmail() + "'"
+					+ " and  otp = " + "'" + request.getOtp() + "'" ;
+	
+		try {
+			Class.forName(DRIVER_NAME);
+			connect = DriverManager.getConnection(CONNECTION_URL);
+			statement = connect.createStatement();
+			res = statement.executeQuery(sqlUrl);
+
+			if (res.next() == true) {
+				return SUCCESS;
+			} else {
+				return INVALID;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return ERROR;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return ERROR;
+		}
 	}
 
 	@Override
@@ -112,7 +149,7 @@ public class UserDao implements IUserDAO {
 		UserResponse response = new UserResponse();
 		String updateSql =  null;
 		if(!isOtpNeedsToBeSet) {
-			updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'" + " and set otp = " + null +
+			updateSql = "update user_login_details set user_password = " + "'" + userRequest.getPassword() + "'" + " , otp = " + null +
 					" where email = " + "'" + userRequest.getEmail() + "'";
 		}else {
 			updateSql = "update user_login_details set otp = " + userRequest.getOtp() + " where email = " +"'" + userRequest.getEmail() + "'";
